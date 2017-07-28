@@ -59,12 +59,6 @@ test:    test_gzip test_gunzip
 	rm gz.tmp.gz gz.tmp
 	# *** O.K. Test finished successfully. ***
 
-install: libgzstream.a test
-	cp libgzstream.a /usr/lib
-	cp gzstream.h /usr/include
-	chmod o+r /usr/include/gzstream.h
-	# *** O.K. Installation finished successfully. ***
-
 gzstream.o : gzstream.C gzstream.h
 	${CXX} ${CPPFLAGS} -c -o gzstream.o gzstream.C
 
@@ -84,13 +78,10 @@ test_gunzip : test_gunzip.o libgzstream.a
 	${CXX} -o test_gunzip test_gunzip.o ${LDFLAGS}
 
 clean :
-	rm *.o
+	rm -f *.o libgzstream.a
 
 cleanall :
 	rm *.o libgzstream.a test_gzip test_gunzip
-
-uninstall:
-	rm /usr/include/gzstream.h /usr/lib/libgzstream.a
 
 # ============================================================================
 # EOF
